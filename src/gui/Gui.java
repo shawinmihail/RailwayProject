@@ -34,4 +34,8 @@ public class Gui
         {StaticConstantInit.gui.launch();}
     }
 
+    public int getNumberOfIterations(){
+        return Integer.parseInt(mainWindow.viewAndControlPanel.controlPanel.iterationsNumberField.getText());
+    }
+
 }

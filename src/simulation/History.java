@@ -15,10 +15,36 @@ public class History
 
     double totalStorageCosts;
     double totalTransportCosts;
+    HashMap<String,Object> trainsLaunched = new HashMap<>();
+
+    public double getAvgCosts()
+    {
+        return (totalStorageCosts+totalTransportCosts)/(StaticConstantInit.gui.getNumberOfIterations());
+    }
+
+    public double getAvgStorageCosts()
+    {
+        return (totalStorageCosts)/(StaticConstantInit.gui.getNumberOfIterations());
+    }
+
+    public double getAvgTransportCosts()
+    {
+        return (totalTransportCosts)/(StaticConstantInit.gui.getNumberOfIterations());
+    }
+
+    public HashMap<String, Object> getTrainsLaunched()
+    {
+        return trainsLaunched;
+    }
 
     public History(int simulationTime){
         this.simulationTime = simulationTime;
         this.loadsHistory = new HashMap[simulationTime];
+        for (TrainFactory trainFactory : StaticConstantInit.wayScheme.trainFactories.values())
+        {
+            trainsLaunched.put(trainFactory.name,0);
+        }
+
     }
 
     public double getTotalStorageCosts()
@@ -87,6 +113,7 @@ public class History
         {
             if(trainFactory.trainIsLaunched(time)){
                 totalTransportCosts = totalTransportCosts + train_price;
+                trainsLaunched.put(trainFactory.name,(int)trainsLaunched.get(trainFactory.name) + 1);
             }
         }
 

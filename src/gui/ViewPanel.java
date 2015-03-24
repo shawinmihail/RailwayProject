@@ -1,15 +1,12 @@
 package gui;
 
-import org.jfree.chart.ChartPanel;
-import simulation.TrainFactory;
 import staticConstantInit.StaticConstantInit;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 public class ViewPanel extends JTabbedPane
 {
@@ -68,7 +65,7 @@ public class ViewPanel extends JTabbedPane
         double transportCosts = 0;
         double avgTotalCosts = 0;
         double avgStorageCosts = 0;
-        double avgTrainCosts = 0;
+        double avgTransportCosts = 0;
         int trainsWasLaunched = 0;
         try
         {
@@ -76,12 +73,22 @@ public class ViewPanel extends JTabbedPane
             totalCosts = StaticConstantInit.simulation.history.getTotalCosts();
             transportCosts = StaticConstantInit.simulation.history.getTotalTransportCosts();
             storageCosts = StaticConstantInit.simulation.history.getTotalStorageCosts();
+            avgTotalCosts = StaticConstantInit.simulation.history.getAvgCosts();
+            avgStorageCosts = StaticConstantInit.simulation.history.getAvgStorageCosts();
+            avgTransportCosts = StaticConstantInit.simulation.history.getAvgTransportCosts();
+            for (Object wasLaunched : StaticConstantInit.simulation.history.getTrainsLaunched().values()){
+                trainsWasLaunched = trainsWasLaunched + (int)wasLaunched;
+            }
         }
         catch (Exception e){};
         resultsTable.getModel().setValueAt(numberOfIterations,0,1);
         resultsTable.getModel().setValueAt(totalCosts,1,1);
         resultsTable.getModel().setValueAt(storageCosts,2,1);
         resultsTable.getModel().setValueAt(transportCosts,3,1);
+        resultsTable.getModel().setValueAt(avgTotalCosts,4,1);
+        resultsTable.getModel().setValueAt(avgStorageCosts,5,1);
+        resultsTable.getModel().setValueAt(avgTransportCosts,6,1);
+        resultsTable.getModel().setValueAt(trainsWasLaunched,7,1);
     }
 
     protected void clearRouteTablePeriods() {

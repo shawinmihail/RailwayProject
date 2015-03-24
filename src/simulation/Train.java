@@ -26,7 +26,6 @@ public class Train
             int timeInRoad = currentTime-creatingTime;
             findPosition(timeInRoad);
             uploadingAndUnloading();
-            //printTrainStatus(9, "Train1", timeInRoad);
         }
 
         protected void findPosition(int timeInRoad){
@@ -54,8 +53,6 @@ public class Train
                 }
             }
         }
-
-        protected void uploadDirectRouteOnes() {}
 
         protected void uploadShortestWayCase() {
             for (Load load : currentStation.loads.values())
