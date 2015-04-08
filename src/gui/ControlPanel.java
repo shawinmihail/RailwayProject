@@ -169,12 +169,12 @@ public class ControlPanel extends JPanel
                     clearInfoTable();
                     String stationName = stationTable.getValueAt(stationTable.getSelectedRow(), 0).toString();
                     int i = 0;
-                    if(StaticConstantInit.wayScheme.findStation(stationName).growthCoefficient.keySet().size() != 0)
+                    if(StaticConstantInit.wayScheme.findStation(stationName).growthCoefficients.keySet().size() != 0)
                     {
-                        for (Station station : StaticConstantInit.wayScheme.findStation(stationName).growthCoefficient.keySet())
+                        for (Station station : StaticConstantInit.wayScheme.findStation(stationName).growthCoefficients.keySet())
                         {
                             String destination = station.name;
-                            double amount = (double) StaticConstantInit.wayScheme.findStation(stationName).growthCoefficient.get(station);
+                            double amount = (double) StaticConstantInit.wayScheme.findStation(stationName).growthCoefficients.get(station).coefficient;
                             infoTable.getModel().setValueAt("loads to" + destination + " - " + amount, i, 0);
                             i++;
                         }
@@ -207,10 +207,10 @@ public class ControlPanel extends JPanel
         String[] columnNames = {"Info"};
         Object[][] data = new Object[99][1];
         int i = 0;
-        for (Station station : StaticConstantInit.wayScheme.findStation(stationName).growthCoefficient.keySet())
+        for (Station station : StaticConstantInit.wayScheme.findStation(stationName).growthCoefficients.keySet())
         {
             String destination = station.name;
-            double amount = (double)StaticConstantInit.wayScheme.findStation(stationName).growthCoefficient.get(station);
+            double amount = (double)StaticConstantInit.wayScheme.findStation(stationName).growthCoefficients.get(station).coefficient;
             data[i][0] = "loads to" + destination + " - " + amount;
             i++;
         }

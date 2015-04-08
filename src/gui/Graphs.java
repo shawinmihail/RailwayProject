@@ -84,15 +84,19 @@ public class Graphs
                 }
                 if (lastNode != null)
                 {
-                    HashMap<String,Object> attributes = new HashMap<>();
+                    HashMap<String, Object> attributes = new HashMap<>();
                     attributes.put("weight", getEdgeLength(lastNode.getId(), newNode.getId()));
-                    attributes.put("layout.weight",1.1);
+                    attributes.put("layout.weight", 1.1);
                     try
                     {
                         graphRoutes.addEdge(lastNode.getId() + newNode.getId(), lastNode.getId(), newNode.getId()).addAttributes(attributes);
                     }
-                    catch(IdAlreadyInUseException e) {}
-                    catch(EdgeRejectedException e){}
+                    catch (IdAlreadyInUseException e)
+                    {
+                    }
+                    catch (EdgeRejectedException e)
+                    {
+                    }
                     newNode.setAttribute("ui.label", station.name);
                 }
                 lastNode = newNode;

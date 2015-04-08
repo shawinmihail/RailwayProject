@@ -125,7 +125,6 @@ INSERT INTO LoadsGrowth (stationFrom_name,stationTo_name,amount) VALUES ("B3","C
 INSERT INTO LoadsGrowth (stationFrom_name,stationTo_name,amount) VALUES ("C5","B5",19);
 INSERT INTO LoadsGrowth (stationFrom_name,stationTo_name,amount) VALUES ("C4","B5",13);
 INSERT INTO LoadsGrowth (stationFrom_name,stationTo_name,amount) VALUES ("C3","B4",3);
-INSERT INTO LoadsGrowth (stationFrom_name,stationTo_name,amount) VALUES ("C4","B5",23);
 
 INSERT INTO Trains (train_id,train_name) VALUES (1,"Train1");
 INSERT INTO Trains (train_id,train_name) VALUES (2,"Train2");

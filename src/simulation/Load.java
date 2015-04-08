@@ -12,3 +12,6 @@ public class Load
         this.amount = amount;
     }
 }
+
+
+

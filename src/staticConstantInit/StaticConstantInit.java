@@ -22,6 +22,7 @@ public class StaticConstantInit
         dbProxy = new DbProxy();
         wayScheme = new WayScheme();
         graphs = new Graphs();
+        wayScheme.calculateLoadsRoutes();
         simulation = new Simulation();
         gui = new Gui();
     }

@@ -27,24 +27,28 @@ public class WayScheme
         ExecutorTrainsList executorTrainsList = new ExecutorTrainsList(DbProxy.connection);
         TrainsListResponseMessage trainsListResponseMessage = new TrainsListResponseMessage(executorTrainsList.responseMaps);
 
-        for (HashMap trainMap : trainsListResponseMessage.responseMaps)
+        try
         {
-            String train_name = (String)trainMap.get("name");
-            int train_id = (int)trainMap.get("train_id");
-            TrainFactory newTrainFactory = new TrainFactory(train_name,train_id);
-            trainFactories.put(newTrainFactory.name, newTrainFactory);
-
-            ExecutorRoute executorRoute = new ExecutorRoute(DbProxy.connection,train_name);
-            RouteResponseMessage routeResponseMessage = new RouteResponseMessage(executorRoute.responseMaps);
-
-            newTrainFactory.createRoute(routeResponseMessage.responseMaps.length);
-            for (HashMap routeMap : routeResponseMessage.responseMaps)
+            for (HashMap trainMap : trainsListResponseMessage.responseMaps)
             {
-                String station_name = (String)routeMap.get("station_name");
-                int station_index = (int)routeMap.get("station_index");
-                newTrainFactory.addRoutePoint(findStation(station_name),station_index);
+                String train_name = (String) trainMap.get("name");
+                int train_id = (int) trainMap.get("train_id");
+                TrainFactory newTrainFactory = new TrainFactory(train_name, train_id);
+                trainFactories.put(newTrainFactory.name, newTrainFactory);
+
+                ExecutorRoute executorRoute = new ExecutorRoute(DbProxy.connection, train_name);
+                RouteResponseMessage routeResponseMessage = new RouteResponseMessage(executorRoute.responseMaps);
+
+                newTrainFactory.createRoute(routeResponseMessage.responseMaps.length);
+                for (HashMap routeMap : routeResponseMessage.responseMaps)
+                {
+                    String station_name = (String) routeMap.get("station_name");
+                    int station_index = (int) routeMap.get("station_index");
+                    newTrainFactory.addRoutePoint(findStation(station_name), station_index);
+                }
             }
         }
+        catch (NullPointerException e){}
         takeTimes();
         generateSchedule();
     }
@@ -74,16 +78,37 @@ public class WayScheme
         ExecutorLoadsGrowthList executorLoadsGrowthList = new ExecutorLoadsGrowthList(DbProxy.connection);
         LoadsGrowthListResponseMessage loadsGrowthListResponseMessage = new LoadsGrowthListResponseMessage(executorLoadsGrowthList.responseMaps);
 
-        for (HashMap growthCoefficientMap : loadsGrowthListResponseMessage.responseMaps)
+        try
         {
-            String stationFrom_name = (String)growthCoefficientMap.get("stationFrom_name");
-            String stationTo_name = (String)growthCoefficientMap.get("stationTo_name");
-            double amount = (int)growthCoefficientMap.get("amount");
-            Station stationTo = findStation(stationTo_name);
-            Station stationFrom = findStation(stationFrom_name);
-            stationFrom.growthCoefficient.put(stationTo,amount);
+            for (HashMap growthCoefficientMap : loadsGrowthListResponseMessage.responseMaps)
+            {
+                String stationFrom_name = (String) growthCoefficientMap.get("stationFrom_name");
+                String stationTo_name = (String) growthCoefficientMap.get("stationTo_name");
+                double amount = (int) growthCoefficientMap.get("amount");
+                Station stationTo = findStation(stationTo_name);
+                Station stationFrom = findStation(stationFrom_name);
+                GrowthCoefficient growthCoefficient = new GrowthCoefficient(stationFrom, stationTo, amount);
+                stationFrom.growthCoefficients.put(stationTo, growthCoefficient);
+            }
         }
+        catch (NullPointerException e){}
 }
+
+    public void calculateLoadsRoutes(){
+        for (Way way : ways.values())
+        {
+            for (Station station : way.stations)
+            {
+                for (GrowthCoefficient growthCoefficient : station.growthCoefficients.values())
+                {
+                    growthCoefficient.calculateLoadRoute();
+                }
+
+            }
+
+        }
+
+    }
 
     protected void takeIntersections() {
         ExecutorIntersectionsList executorIntersectionsList = new ExecutorIntersectionsList(DbProxy.connection);

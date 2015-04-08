@@ -17,7 +17,7 @@ public class Simulation
             history.recordLoadsHistory(time);
         }
         //printAllLoads();
-        printCosts();
+        //printCosts();
     }
 
     protected void startTrainMoving(int time) {
@@ -36,6 +36,7 @@ public class Simulation
             }
         }
     }
+
 
     protected void removeArrivedLoads(){
         for (Way way : StaticConstantInit.wayScheme.ways.values())

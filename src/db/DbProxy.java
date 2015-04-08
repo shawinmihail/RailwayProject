@@ -66,7 +66,7 @@ public class DbProxy
     private void create_schema() {
 
         String script;
-        String sqlScriptPath = "db_scheme.sql";
+        String sqlScriptPath = "db_scheme2.sql";
         try {
             script = Resources.toString(Resources.getResource(sqlScriptPath), Charsets.UTF_8);
             try {
@@ -85,7 +85,7 @@ public class DbProxy
 
     public void start() {
 
-        String dbPath = "RailwayNet.sqlite";
+        String dbPath = "RailwayNet2.sqlite";
         try {
             if(!new File(dbPath).exists()) {
                 new File(dbPath).createNewFile();

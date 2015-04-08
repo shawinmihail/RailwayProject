@@ -31,6 +31,7 @@ public class TrainFactory
     }
 
     public void generateSchedule(HashMap<String,Object> times) {
+        try{
         int time = 0;
         schedule.put(time,route[0]);
         for (int i = 1; i < route.length;i++)
@@ -40,6 +41,8 @@ public class TrainFactory
             schedule.put(time, route[i]);
         }
         timeToArrival = time;
+        }
+        catch (NullPointerException e){}
     }
 
     public void start(int currentTime) {

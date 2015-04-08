@@ -1,6 +1,7 @@
 package simulation;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Station
 {
@@ -9,9 +10,9 @@ public class Station
     public int stationId;
     public int stationIndex;
     public String name;
-    public HashMap<Object,Intersection> intersections = new HashMap();
+    public HashMap<Object,Intersection> intersections = new HashMap<>();
     public HashMap<Station,Load> loads = new HashMap<>();
-    public HashMap <Station,Object> growthCoefficient = new HashMap<>();
+    public HashMap<Station,GrowthCoefficient> growthCoefficients = new HashMap<>();
     boolean isYard = false;
 
     public Station(String wayName, int stationId,int stationIndex, String name)
@@ -48,9 +49,9 @@ public class Station
     }
 
     public  void loadGrow() {
-        for (Station address : growthCoefficient.keySet())
+        for (GrowthCoefficient growthCoefficient : growthCoefficients.values())
         {
-            Load newLoad = new Load(address,(double)growthCoefficient.get(address));
+            Load newLoad = new Load(growthCoefficient.stationTo,growthCoefficient.coefficient);
             addLoad(newLoad,newLoad.amount);
         }
     }
