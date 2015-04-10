@@ -13,7 +13,7 @@ public class Station
     public HashMap<Object,Intersection> intersections = new HashMap<>();
     public HashMap<Station,Load> loads = new HashMap<>();
     public HashMap<Station,GrowthCoefficient> growthCoefficients = new HashMap<>();
-    boolean isYard = false;
+    public boolean isYard = false;
 
     public Station(String wayName, int stationId,int stationIndex, String name)
     {

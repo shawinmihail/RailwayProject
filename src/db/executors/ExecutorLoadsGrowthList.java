@@ -42,7 +42,7 @@ public class ExecutorLoadsGrowthList extends Executor {
             HashMap<String, Object> answer = new HashMap();
             while (resultSetQuery.next())
             {
-                answer.put("amount", resultSetQuery.getInt("amount"));
+                answer.put("amount", resultSetQuery.getDouble("amount"));
                 answer.put("stationFrom_name", resultSetQuery.getString("stationFrom_name"));
                 answer.put("stationTo_name", resultSetQuery.getString("stationTo_name"));
                 this.responseMaps[answerNumber] = new HashMap();

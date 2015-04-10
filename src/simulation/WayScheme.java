@@ -84,11 +84,10 @@ public class WayScheme
             {
                 String stationFrom_name = (String) growthCoefficientMap.get("stationFrom_name");
                 String stationTo_name = (String) growthCoefficientMap.get("stationTo_name");
-                double amount = (int) growthCoefficientMap.get("amount");
+                double amount = (double) growthCoefficientMap.get("amount");
                 Station stationTo = findStation(stationTo_name);
                 Station stationFrom = findStation(stationFrom_name);
                 GrowthCoefficient growthCoefficient = new GrowthCoefficient(stationFrom, stationTo, amount);
-                stationFrom.growthCoefficients.put(stationTo, growthCoefficient);
             }
         }
         catch (NullPointerException e){}

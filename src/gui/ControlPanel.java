@@ -289,7 +289,7 @@ public class ControlPanel extends JPanel
     protected JTextField createStoragePriceField() {
         JTextField storagePriceField = new JTextField();
         storagePriceField.setColumns(3);
-        storagePriceField.setText("0.1");
+        storagePriceField.setText("2.67");
         return storagePriceField;
     }
 

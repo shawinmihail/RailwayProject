@@ -46,7 +46,7 @@ public class TrainFactory
     }
 
     public void start(int currentTime) {
-        if(Math.floorMod(currentTime+1,period) == 0){
+        if(Math.floorMod(currentTime+1,period) == 0 && period != -1){
             createTrain(currentTime);
         }
         moveTrains(currentTime);
@@ -85,7 +85,7 @@ public class TrainFactory
     }
 
     public boolean trainIsLaunched(int currentTime) {
-        if(Math.floorMod(currentTime+1,period) == 0){
+        if(Math.floorMod(currentTime+1,period) == 0 && period != -1){
             return true;
         }
         else{
